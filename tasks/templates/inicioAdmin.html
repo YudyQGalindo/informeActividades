@@ -1,0 +1,43 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Inicio Admin {% endblock Titulo %}
+
+{% block Contenido %}
+
+<main class="contenedor">
+
+    <h1 class="titulo">Actividades Registradas</h1>
+
+    {% include 'barraBusqueda.html' %}
+
+    <ul class="list-group">
+        {% for task in tasks %}
+        <li class="list-group-item">
+
+            {% if task.datecompleted %}
+            <header class="headerTask">
+                <h2 class="h2Completada">{{task.title}}</h2>
+                <p class="txtUsuario">{{task.user.username}}</p>
+            </header>
+            <p>Descripción: {{task.description}}</p>
+            <p>Fecha Inicio: {{ task.created|date }}</p>
+            <p><b>Fecha finalización: {{ task.datecompleted|date }}</b></p>
+            {% else %}
+            <header class="headerTask">
+                <h2 class="h2Pendiente">{{task.title}}</h2>
+                <p class="txtUsuario">{{task.user.username}}</p>
+            </header>
+            <p>Descripción: {{task.description}}</p>
+            <p>Fecha Inicio: {{ task.created|date }}</p>
+            <p><b>Actividad en progreso</b></p>
+            {% endif %}
+
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% include 'paginasTask.html' %}
+
+</main>
+
+{% endblock Contenido %}

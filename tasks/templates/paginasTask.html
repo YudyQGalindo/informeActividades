@@ -1,0 +1,32 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="ruta/a/tu/styles.css">
+
+<div class="contPagina">
+    <nav>
+        <ul class="paginaUl">
+            {% if tasks.has_previous %}
+                <li class="itemPagina">
+                    <a class="paginaA" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Primera</a>
+                </li>
+                <li class="itemPagina">
+                    <a class="paginaA" href="?page={{ tasks.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&laquo;</a>
+                </li>
+            {% endif %}
+            
+            {% for pagina in paginas %}
+                <li class="itemPagina {% if pagina == tasks.number %}current-page{% endif %}">
+                    <a class="paginaA" href="?page={{ pagina }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ pagina }}</a>
+                </li>
+            {% endfor %}
+            
+            {% if tasks.has_next %}
+                <li class="itemPagina">
+                    <a class="paginaA" href="?page={{ tasks.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&raquo;</a>
+                </li>
+                <li class="itemPagina">
+                    <a class="paginaA" href="?page={{ tasks.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Última</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>

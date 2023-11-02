@@ -1,0 +1,26 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Detalles Usuario {% endblock Titulo %}
+
+{% block Contenido %}
+
+<main class="contenedor">
+            <h1 class="titulo">Usuarios Registrados</h1>
+
+            <ul class="list-group">
+                {% for user in users %}
+                <li class="list-group-item">
+                    <a class="aTask" href="{% url 'updateUser' user.id %}">
+                        <p class="h2Pendiente txtUsuario">{{user.username}}</p>
+                        <p>Nombre: {{user.first_name}}</p>
+                        <p>Apellido: {{user.last_name}}</p>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% include 'paginasUser.html' %}
+
+</main>
+
+{% endblock Contenido %}

@@ -1,0 +1,41 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Iniciar Sesion {% endblock Titulo %}
+
+{% block Contenido %}
+
+{% load static %}
+
+<main class="contenedor">
+
+    <section class="contSignin">
+
+        <figure class="contFigSignin">
+            <img src="{% static 'img/iniciSesion.svg' %}" alt="Logo Inicio Sesión" class="imgSignin">
+        </figure>
+
+        <div class="contenidoSignin">
+
+            <h1 class="tituloSignin"> ¡Bienvenido! </h1>
+            <p class="textoSignin">Inicia sesión para continuar</p>
+
+            <form action="/signin/" method="POST" class="formSignin">
+
+                {{error}}
+                {% csrf_token %}
+
+                <input type="text" name="username" class="inputSignin" placeholder="Ingrese el usuario">
+
+                <input type="password" name="password" class="inputSignin" placeholder="Ingrese la contraseña">
+
+                <button class="inputSignin btnVerde">Iniciar sesión</button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock Contenido %}

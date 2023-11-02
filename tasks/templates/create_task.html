@@ -1,0 +1,41 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Crear Tarea {% endblock Titulo %}
+
+{% block Contenido %}
+
+{% load static %}
+
+<main class="contenedor">
+
+    <section class="contTask">
+
+        <div class="contenidoSignin">
+
+            <h1 class="tituloTask"> Crear Actividad </h1>
+            <p class="textoTask">Agrega una nueva actividad</p>
+
+            <form action="/tasks/create/" method="POST" class="formSignin">
+
+                {{error}}
+                {% csrf_token %}
+                <input type="text" name="title" id="title" class="inputSignin" placeholder="Ingrese el título">
+                <input type="text" name="description" id="description" class="inputSignin" placeholder="Ingrese la descripción">
+
+                <button class="inputSignin btnVerde">
+                    Guardar
+                </button>
+
+            </form>
+
+        </div>
+
+        <figure class="contFigTask">
+            <img src="{% static 'img/addTask.svg' %}" alt="Logo Crear Tarea" class="imgSignin">
+        </figure>
+
+    </section>
+
+</main>
+
+{% endblock Contenido %}

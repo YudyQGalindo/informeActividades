@@ -1,0 +1,57 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Detalles Tarea {% endblock Titulo %}
+
+{% block Contenido %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+<main class="contenedor">
+
+    <section class="contSignin">
+
+        <figure class="contFigSignin">
+            <img src="{% static 'img/updateUsuario.svg' %}" alt="Logo Inicio Sesión" class="imgSignin">
+        </figure>
+
+        <div class="contenidoSignin">
+
+            <h1 class="tituloSignin"> Actualizar Usuario </h1>
+            <p class="textoSignin">Actualizar datos del usuario</p>
+
+            {{error}}
+
+            <form method="POST" class="formSignin">
+
+                {% csrf_token %}
+
+                <div class="formUpdate">
+                    <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
+                    {{ form.first_name|add_class:"inputSignin" }}
+                </div>
+                <div class="formUpdate">
+                    <label for="{{ form.last_name.id_for_label }}">Apellidos:</label>
+                    {{ form.last_name|add_class:"inputSignin" }}
+                </div>
+
+                <button class="inputSignin btnVerde">Actualizar</button>
+
+            </form>
+
+            <form action="{% url 'deleteUser' user.id %}" method="POST">
+                {% csrf_token %}
+                <button class="inputSignin btnRojo">
+                    Eliminar
+                </button>
+            </form>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+{% endblock Contenido %}

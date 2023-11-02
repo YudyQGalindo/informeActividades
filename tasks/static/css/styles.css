@@ -1,0 +1,649 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'PT Serif', serif;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contenedor {
+    flex: 1;
+    padding: 60px 0;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.titulo {
+    font-size: 2.5rem;
+    color: #085d9c;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.btnVerde {
+    background-color: #00ff4c;
+    color: #000;
+    font-weight: 600;
+}
+
+.btnAmarillo {
+    background-color: #fbff00;
+    color: #000;
+    font-weight: 600;
+}
+
+.btnRojo {
+    background-color: #ec313b;
+    color: white;
+    font-weight: 600;
+}
+
+/* página de inicio*/
+/* Header */
+
+.headerInicio {
+    width: 100%;
+    height: 600px;
+    background: #0052D4;
+    background: -webkit-linear-gradient(to right, hsla(212, 96%, 71%, 0.767), hsla(229, 92%, 62%, 0.5), hsla(217, 100%, 42%, 0.767)), url(../img/portada.jpg);
+    background: linear-gradient(to right, hsla(212, 96%, 71%, 0.767), hsla(229, 92%, 62%, 0.5), hsla(217, 100%, 42%, 0.767)), url(../img/portada.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.textosHeader {
+    display: flex;
+    height: 400px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.textosHeader h1 {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.textosHeader h2 {
+    font-size: 2.0rem;
+    font-weight: 300;
+    color: #fff;
+}
+
+.navbar {
+    text-align: right;
+    padding: 30px 50px 0 0;
+}
+
+.navbar a {
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.3rem;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Nuestro producto */
+
+.sobreNosotros {
+    padding: 30px 0 60px 0;
+}
+
+.contNosotros {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.imgNosotros {
+    width: 48%;
+}
+
+.sobreNosotros .contenidoTextos {
+    width: 48%;
+}
+
+.contenidoTextos h3 {
+    margin-bottom: 20px;
+    color: #0a2a47;
+    text-align: center;
+    font-size: 1.7rem;
+    padding-left: 9px;
+}
+
+.contenidoTextos p {
+    padding: 0 0 30px 15px;
+    font-weight: 300;
+    font-size: 1.3rem;
+    text-align: justify;
+}
+
+/* Características */
+
+.caracteristicas {
+    background-color: #f2f2f2f2;
+    padding-bottom: 30px;
+}
+
+.contCaracteristica {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.caracteristicaInd {
+    width: 28%;
+    text-align: center;
+}
+
+.caracteristicaInd img {
+    width: 90%;
+}
+
+.caracteristicaInd h3 {
+    font-size: 1.7rem;
+    margin: 10px 0;
+    color: #0a2a47;
+}
+
+.caracteristicaInd p {
+    font-weight: 300;
+    font-size: 1.3rem;
+    text-align: justify;
+}
+
+/* Página Base */
+
+.headerBase {
+    position: relative;
+    background-color: #0A2A47;
+    width: 100%;
+    padding: 2rem;
+    box-shadow: 0 .5rem 1rem #52525233;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.logo {
+    height: 3rem;
+}
+
+.navbarBase a {
+    font-size: 1.3rem;
+    margin-left: 1rem;
+    color: #f0f8ff;
+    text-decoration: none;
+}
+
+.navbarBase a:hover {
+    color: #81c8f8;
+    text-decoration: underline;
+}
+
+.estiloMenu {
+    display: none;
+}
+
+.imagenMenu {
+    font-size: 2.3rem;
+    color: #81c8f8;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Actividades registradas */
+
+.rowActividades {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.colActividades {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 15px;
+    margin-left: 25%;
+}
+
+/* Inicio Sesión */
+
+.contSignin {
+    margin: auto;
+    width: 90%;
+    background: url(../img/fondosignin.jpg);
+    background-size: cover;
+    overflow: hidden;
+    padding: .7rem;
+    border-radius: 1rem;
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: .6rem;
+}
+
+.contFigSignin {
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: #0a284775;
+    display: flex;
+}
+
+.imgSignin {
+    margin: auto;
+    width: 80%;
+    max-width: 70vw;
+}
+
+.contenidoSignin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3rem .7rem;
+    text-align: center;
+}
+
+.tituloSignin {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.textoSignin {
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.formSignin {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+}
+
+.inputSignin {
+    width: 80%;
+    max-width: 500px;
+    outline: none;
+    border: none;
+    padding: 1rem;
+    font: 300;
+    font-size: 1rem;
+    border-radius: .6rem;
+}
+
+/* Actualizar usuario */
+
+.formUpdate {
+    margin-bottom: 8px;
+}
+
+.formUpdate label {
+    display: block;
+    margin-bottom: 5px;
+    font: 300;
+    font-size: 1.2rem;
+}
+
+/* Mostrar tarea Completada */
+
+.list-group {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.h2Completada {
+    font-size: 2rem;
+    color: #16a741;
+}
+
+.list-group-item p {
+    font-size: 1.3rem;
+}
+
+.txtUsuario {
+    font-weight: bold;
+    color: #0A2A47;
+}
+
+.headerTask {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Mostrar tarea pendiente */
+
+.h2Pendiente {
+    font-size: 2rem;
+    color: #085d9c;
+}
+
+.aTask {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Crear tarea */
+
+.contTask {
+    margin: auto;
+    width: 90%;
+    background: url(../img/fondoTask.jpg);
+    background-size: cover;
+    overflow: hidden;
+    padding: .7rem;
+    border-radius: 1rem;
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: .6rem;
+}
+
+.contFigTask{
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: #8b009775;
+    display: flex;
+}
+
+.tituloTask{
+    font-size: 2.5rem;
+}
+
+.textoTask{
+    font-size: 1.3rem;
+}
+
+/* Paginación */
+
+.contPagina {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.paginaUl {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemPagina {
+    margin: 0 7px;
+}
+
+.paginaA {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #0A2A47;
+}
+
+.current-page a {
+    color: #05c23e; 
+    font-weight: bold; 
+}
+
+/* Barra de búsqueda */
+
+.search-bar {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px; 
+    width: 80%; 
+    margin: 0 auto; 
+}
+
+.search-bar form {
+    display: flex;
+    align-items: center;
+    width: 100%; 
+}
+
+.search-bar input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px; 
+    font-size: 1.2rem; 
+    width: 100%; 
+}
+
+.search-bar button {
+    background-color: #0052D4; 
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1.2rem; 
+}
+
+/* Footer */
+
+footer {
+    background-color: #0A2A47;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.ftcontainer {
+    position: relative;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-top: 3px;
+}
+
+.col {
+    flex: 0 0 33%;
+    max-width: 33%;
+    text-align: center;
+}
+
+.col h4 {
+    color: #fff;
+    font-size: 1.4rem;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.col p {
+    color: #ccc;
+    font-size: 1.3rem;
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+    list-style: none;
+}
+
+.social-icons li a {
+    color: #fff;
+    font-size: 3rem;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.social-icons li a:hover {
+    transform: translateY(-10px);
+}
+
+@media screen and (max-width:900px) {
+
+    /* página inicio*/
+    /* header */
+
+    header {
+        background-position: center;
+    }
+
+    /* Nuestro Producto */
+
+    .contNosotros {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sobreNosotros .contenidoTextos {
+        width: 90%;
+    }
+
+    .imgNosotros {
+        width: 90%;
+    }
+
+    /* Características */
+
+    .contCaracteristica {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .caracteristicaInd {
+        width: 100%;
+        text-align: center;
+    }
+
+    .caracteristicaInd:nth-child(1),
+    .caracteristicaInd:nth-child(2) {
+        margin-bottom: 60px;
+    }
+
+    .caracteristicaInd img {
+        width: 70%;
+    }
+
+    /*Página base*/
+
+    .imagenMenu {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .navbarBase {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #0A2A47;
+        padding: 1rem 2rem;
+        border-top: solid 1rem #0000004d;
+        box-shadow: 0 .5rem 1rem #0000001a;
+        transform-origin: top;
+        transform: scaleY(0);
+        opacity: 0;
+        transform: .2s linear;
+    }
+
+    .estiloMenu:checked~.navbarBase {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    .estiloMenu:checked~.imagenMenu::before {
+        content: '\f00d';
+    }
+
+    .navbarBase a {
+        display: block;
+        margin: 1.4rem 0;
+        font-size: 1.3rem;
+    }
+
+    /* footer */
+
+    .col {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-bottom: 15px;
+    }
+
+}
+
+@media screen and (max-width:500px) {
+
+    /* página inicio*/
+    /* header */
+
+    .navbar {
+        text-align: center;
+        padding: 30px 0 0 0;
+    }
+
+    .navbar a {
+        margin-right: 5px;
+    }
+
+    .textosHeader h1 {
+        font-size: 35px;
+    }
+
+    .textosHeader h2 {
+        font-size: 20px;
+    }
+
+    /* Nuestro Producto */
+
+    .imgNosotros {
+        margin-bottom: 60px;
+        width: 99%;
+    }
+
+    .sobreNosotros .contenidoTextos {
+        width: 95%;
+    }
+
+    /* footer */
+
+    .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

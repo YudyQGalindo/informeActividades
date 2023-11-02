@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>{% block Titulo %} Panel Principal {% endblock Titulo %}</title>
+</head>
+
+<body>
+
+    <header class="headerBase">
+
+        <img src="{% static 'img/logochiquinquira.png' %}" alt="Logo de Chiquinquirá" class="logo">
+
+        <input type="checkbox" id="menu" class="estiloMenu">
+        <label for="menu" class="fa-solid fa-bars imagenMenu"></label>
+        <nav class="navbarBase">
+            <a href="{% url 'tasks' %}" class="">Actividades Pendientes</a>
+            <a href="{% url 'tasks_completed' %}" class="">Actividades Completadas</a>
+            <a href="{% url 'create_task' %}" class="">Crear Actividad</a>
+            <a href="{% url 'inicioAdmin' %}" class="">Actividades Registradas</a>
+            <a href="{% url 'signup' %}" class="">Registrar Usuario</a>
+            <a href="{% url 'usersDetail' %}" class="">Usuarios Registrados</a>
+            <a href="{% url 'signin' %}" class="">Iniciar Sesión</a>
+            <a href="{% url 'logout' %}" class="">Cerrar sesión</a>
+            <a href="{% url 'index' %}" class="">Inicio</a>
+        </nav>
+
+    </header>
+
+    {% block Contenido %}
+
+    {% endblock Contenido %}
+
+    <footer>
+        <div class="ftcontainer">
+            <div class="row">
+                <div class="col">
+
+                    <h4>Alcaldía de Chiquinquira</h4>
+                    <p><b>Dirección:</b> Calle 17 No. 7 A - 48 CAM Chiquinquirá - Boyacá</p>
+                    <p><b>Horario de Atención:</b> Lunes a Jueves de 8:00 a.m. a 12:00 m y 2:00 p.m. a 6:00 p.m. Viernes
+                        de 8:00 a.m. a 12:00 m y de 2:00 p.m. a 5:30 p.m</p>
+                </div>
+
+                <div class="col">
+                    <h4>Siguenos</h4>
+                    <ul class="social-icons">
+                        <li><a href="https://www.facebook.com/AlChiquinquira?mibextid=LQQJ4d"><i
+                                    class="fa-brands fa-square-facebook" style="color: #fff;"></i></a></li>
+                        <li><a href="https://www.instagram.com/alchiquinquira?igshid=OGQ5ZDc2ODk2ZA%3D%3D"><i
+                                    class="fa-brands fa-square-instagram" style="color: #fff;"></i></a></li>
+                        <li><a href="https://www.youtube.com/@alcaldiadechiquinquirapren2664"><i
+                                    class="fa-brands fa-square-youtube" style="color: #fff;"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h4>Acerca del sitio</h4>
+                    <p>Asesorado, diseñado y desarrollado por: Yudy Quintero © Copyright 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

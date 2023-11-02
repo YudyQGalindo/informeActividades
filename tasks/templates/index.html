@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Inicio</title>
+</head>
+
+<body>
+
+    <header class="headerInicio">
+
+        <nav class="navbar">
+            <a href="{% url 'tasks' %}" class="">Actividades Pendientes</a>
+            <a href="{% url 'tasks_completed' %}" class="">Actividades Completadas</a>
+            <a href="{% url 'create_task' %}" class="">Crear Actividad</a>
+            <a href="{% url 'inicioAdmin' %}" class="">Actividades Registradas</a>
+            <a href="{% url 'signup' %}" class="">Registrar Usuario</a>
+            <a href="{% url 'usersDetail' %}" class="">Usuarios Registrados</a>
+            <a href="{% url 'signin' %}" class="">Iniciar Sesión</a>
+            <a href="{% url 'logout' %}" class="">Cerrar sesión</a>
+            <a href="{% url 'index' %}" class="">Inicio</a>
+            <a href="#"><img src="{% static 'img/logochiquinquira.png' %}" alt="Logo Chiquinquirá"></a>
+
+        </nav>
+        <section class="textosHeader">
+            <h1>Optimiza la gestión de tus actividades diarias</h1>
+            <h2>y generar informes de productividad de forma eficiente</h2>
+        </section>
+        <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path d="M-0.84,26.16 C149.99,150.00 351.77,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #fff;"></path>
+            </svg></div>
+
+    </header>
+
+    <main>
+
+        <section class="contenedor sobreNosotros">
+            <h2 class="titulo">Nuestro producto</h2>
+            <div class="contNosotros">
+                <img src="{% static 'img/nosotros.svg' %}" alt="Imagen Nosotros" class="imgNosotros">
+
+                <div class="contenidoTextos">
+                    <h3>Registro de Actividades Diarias</h3>
+                    <p>Plataforma de registro de actividades diarias, diseñada exclusivamente para los practicantes de
+                        la Alcaldía Municipal de Chiquinquirá. Nuestra aplicación web es la herramienta esencial que
+                        facilitará el seguimiento y registro de tus actividades diarias de manera eficiente y
+                        organizada.</p>
+                    <p>Con nuestra plataforma disfrutarás de una solución simple y efectiva para documentar sus tareas
+                        diarias, con un entorno intuitivo que simplifica la introducción y el seguimiento de las
+                        actividades. Ya no tendrás que preocuparte por la pérdida de información valiosa, ya que cada
+                        detalle quedará registrado, lo que te permitirá enfocarte en tu trabajo sin complicaciones.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="caracteristicas">
+            <div class="contenedor">
+                <h2 class="titulo">Características destacadas</h2>
+                <div class="contCaracteristica">
+                    <div class="caracteristicaInd">
+                        <img src="{% static 'img/tiempo.png' %}" alt="Imagen tiempo">
+                        <h3>Seguimiento en tiempo real</h3>
+                        <p>Registra tus actividades diarias de manera instantánea, permitiéndote un seguimiento en
+                            tiempo real de tus tareas y proyectos.</p>
+                    </div>
+                    <div class="caracteristicaInd">
+                        <img src="{% static 'img/historial.png' %}" alt="Imagen historial">
+                        <h3>Historial de actividades</h3>
+                        <p>Mantén un registro histórico de tus actividades para futuras referencias y evaluaciones de
+                            desempeño.</p>
+                    </div>
+                    <div class="caracteristicaInd">
+                        <img src="{% static 'img/report.png' %}" alt="Imagen reportes">
+                        <h3>Reportes personalizados</h3>
+                        <p>Genera informes detallados de tus actividades, lo que facilita la comunicación con tus
+                            supervisores y la toma de decisiones informadas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="ftcontainer">
+            <div class="row">
+                <div class="col">
+
+                    <h4>Alcaldía de Chiquinquira</h4>
+                    <p><b>Dirección:</b> Calle 17 No. 7 A - 48 CAM Chiquinquirá - Boyacá</p>
+                    <p><b>Horario de Atención:</b> Lunes a Jueves de 8:00 a.m. a 12:00 m y 2:00 p.m. a 6:00 p.m. Viernes
+                        de 8:00 a.m. a 12:00 m y de 2:00 p.m. a 5:30 p.m</p>
+                </div>
+
+                <div class="col">
+                    <h4>Siguenos</h4>
+                    <ul class="social-icons">
+                        <li><a href="https://www.facebook.com/AlChiquinquira?mibextid=LQQJ4d"><i
+                                    class="fa-brands fa-square-facebook" style="color: #fff;"></i></a></li>
+                        <li><a href="https://www.instagram.com/alchiquinquira?igshid=OGQ5ZDc2ODk2ZA%3D%3D"><i
+                                    class="fa-brands fa-square-instagram" style="color: #fff;"></i></a></li>
+                        <li><a href="https://www.youtube.com/@alcaldiadechiquinquirapren2664"><i
+                                    class="fa-brands fa-square-youtube" style="color: #fff;"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h4>Acerca del sitio</h4>
+                    <p>Asesorado, diseñado y desarrollado por: Yudy Quintero © Copyright 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

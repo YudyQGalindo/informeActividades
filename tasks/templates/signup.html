@@ -1,0 +1,43 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Registrar Usuario {% endblock Titulo %}
+
+{% block Contenido %}
+
+{% load static %}
+
+<main class="contenedor">
+
+    <section class="contSignin">
+
+        <figure class="contFigSignin">
+            <img src="{% static 'img/addUsuario.svg' %}" alt="Logo Inicio Sesión" class="imgSignin">
+        </figure>
+
+        <div class="contenidoSignin">
+
+            <h1 class="tituloSignin"> Registrar Usuario </h1>
+            <p class="textoSignin">Agrega un nuevo usuario</p>
+
+            <form action="/signup/" method="POST" class="formSignin">
+
+                {{error}}
+                {% csrf_token %}
+
+                <input type="text" name="first_name" id="first_name" class="inputSignin" placeholder="Ingrese el nombre">
+                <input type="text" name="last_name" id="last_name" class="inputSignin" placeholder="Ingrese los apellidos">
+                <input type="text" name="username" id="username" class="inputSignin" placeholder="Ingrese el usuario para el Inicio de Sesión">
+                <input type="password" name="password1" id="password1" class="inputSignin" placeholder="Ingrese la contraseña">
+                <input type="password" name="password2" id="password2" class="inputSignin" placeholder="Confirmar Contraseña">
+
+                <button class="inputSignin btnVerde">Registrar</button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock Contenido %}

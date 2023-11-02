@@ -1,0 +1,64 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Detalles Tarea {% endblock Titulo %}
+
+{% block Contenido %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+<main class="contenedor">
+
+    <section class="contTask">
+
+        <div class="contenidoSignin">
+
+            <h1 class="tituloTask"> Actualizar Actividad </h1>
+            <p class="textoTask">Actualizar datos de la actividad registrada</p>
+
+            <form method="POST" class="formTask">
+
+                {{error}}
+                {% csrf_token %}
+
+                <div class="formUpdate">
+                    <label for="{{ form.title.id_for_label }}">Título:</label>
+                    {{ form.title|add_class:"inputSignin" }}
+                </div>
+                <div class="formUpdate">
+                    <label for="{{ form.description.id_for_label }}">Descripción:</label>
+                    {{ form.description|add_class:"inputSignin" }}
+                </div>
+
+                <button class="inputSignin btnVerde">Actualizar Campos</button>
+
+            </form>
+
+            <form action="{% url 'complete_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button class="inputSignin btnAmarillo">
+                    Completar Actividad
+                </button>
+            </form>
+
+            <form action="{% url 'delete_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button class="inputSignin btnRojo">
+                    Eliminar Actividad
+                </button>
+            </form>
+
+        </div>
+
+        <figure class="contFigTask">
+            <img src="{% static 'img/updateTask.svg' %}" alt="Logo Crear Tarea" class="imgSignin">
+        </figure>
+
+
+    </section>
+
+
+</main>
+
+{% endblock Contenido %}
