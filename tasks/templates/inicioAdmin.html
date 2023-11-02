@@ -19,6 +19,7 @@
                 <h2 class="h2Completada">{{task.title}}</h2>
                 <p class="txtUsuario">{{task.user.username}}</p>
             </header>
+            <p>Dependencia: {{task.user.dependencia}}</p>
             <p>Descripción: {{task.description}}</p>
             <p>Fecha Inicio: {{ task.created|date }}</p>
             <p><b>Fecha finalización: {{ task.datecompleted|date }}</b></p>
@@ -27,6 +28,7 @@
                 <h2 class="h2Pendiente">{{task.title}}</h2>
                 <p class="txtUsuario">{{task.user.username}}</p>
             </header>
+            <p>Dependencia: {{task.user.dependencia}}</p>
             <p>Descripción: {{task.description}}</p>
             <p>Fecha Inicio: {{ task.created|date }}</p>
             <p><b>Actividad en progreso</b></p>

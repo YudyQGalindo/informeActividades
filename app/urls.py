@@ -4,7 +4,7 @@ from tasks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path('', views.Inicio.as_view(), name='index'),
     path('inicioAdmin/', views.inicioAdmin, name='inicioAdmin'),
     path('usersDetail/', views.usersDetail, name='usersDetail'),
     path('usersDetail/<user_id>/', views.updateUser, name='updateUser'),

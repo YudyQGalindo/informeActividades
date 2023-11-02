@@ -5,16 +5,17 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponseForbidden
 from .forms import createTaskForm, CustomUserCreationForm, UserUpdateForm
 from .models import Task
+from user.models import User
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import View
 
 # Mostrar la página principal
-
-
-def index(request):
-    return render(request, 'index.html')
+class Inicio(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'index.html')
 
 # Mostrar la página principal Admin
 @login_required
@@ -25,6 +26,7 @@ def inicioAdmin(request):
     if queryset:
         tasks = tasks.filter(
             Q(user__username__icontains=queryset) |
+            Q(user__dependencia__icontains=queryset) |
             Q(title__icontains=queryset) |
             Q(description__icontains=queryset)
         ).distinct()
@@ -45,8 +47,6 @@ def inicioAdmin(request):
     return render(request, 'inicioAdmin.html', {'tasks': tasks, 'paginas': paginas, 'pagina_actual': pagina_actual})
 
 # Mostrar las actividades pendientes de un usuario
-
-
 @login_required
 def tasks(request):
     tasks = Task.objects.filter(user=request.user, datecompleted__isnull=True)
@@ -58,8 +58,6 @@ def tasks(request):
     return render(request, 'tasks.html', {'tasks': tasks, 'paginas': paginas, 'pagina_actual': pagina_actual})
 
 # Mostrar las actividades completadas de un usuario
-
-
 @login_required
 def tasks_completed(request):
     tasks = Task.objects.filter(
@@ -72,8 +70,6 @@ def tasks_completed(request):
     return render(request, 'tasks.html', {'tasks': tasks, 'paginas': paginas, 'pagina_actual': pagina_actual})
 
 # Crear una nueva actividad
-
-
 @login_required
 def create_task(request):
     if request.method == 'GET':
@@ -94,8 +90,6 @@ def create_task(request):
             })
 
 # Actualizar las actividades pendientes de un usuario
-
-
 @login_required
 def task_detail(request, task_id):
     if request.method == 'GET':
@@ -117,8 +111,6 @@ def task_detail(request, task_id):
             })
 
 # Marcar una actividad como completada
-
-
 @login_required
 def complete_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
@@ -128,8 +120,6 @@ def complete_task(request, task_id):
         return redirect('tasks')
 
 # Eliminar una actividad
-
-
 @login_required
 def delete_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
@@ -138,8 +128,6 @@ def delete_task(request, task_id):
         return redirect('tasks')
 
 # Inicio de sesión
-
-
 def signin(request):
     if request.method == 'GET':
         return render(request, 'signin.html', {
@@ -165,16 +153,12 @@ def signin(request):
             })
 
 # Cerrar sesión
-
-
 @login_required
 def signout(request):
     logout(request)
     return redirect('index')
 
 # Registrar un nuevo usuario
-
-
 @login_required
 def signup(request):
     if request.method == 'GET':
@@ -188,7 +172,7 @@ def signup(request):
                 # Registro de usuario
                 try:
                     user = User.objects.create_user(
-                        username=request.POST['username'], first_name=request.POST['first_name'], last_name=request.POST['last_name'],  password=request.POST['password1'])
+                        username=request.POST['username'], first_name=request.POST['first_name'], last_name=request.POST['last_name'],  password=request.POST['password1'], dependencia=request.POST['dependencia'])
                     user.save()
                     return redirect('usersDetail')
                 except:
@@ -205,8 +189,6 @@ def signup(request):
             return HttpResponseForbidden("Acceso denegado")
 
 # Mostrar usuarios registrados panel Admin
-
-
 @login_required
 def usersDetail(request):
     users = User.objects.all()
@@ -218,8 +200,6 @@ def usersDetail(request):
     return render(request, 'usersDetail.html', {'users': users, 'paginas': paginas, 'pagina_actual': pagina_actual})
 
 # Actualizar los datos del usuario panel Admin
-
-
 @login_required
 def updateUser(request, user_id):
     if request.method == 'GET':
@@ -241,8 +221,6 @@ def updateUser(request, user_id):
             })
 
 # Eliminar los datos de usuario
-
-
 @login_required
 def deleteUser(request, user_id):
     user = get_object_or_404(User, pk=user_id)
