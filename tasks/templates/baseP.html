@@ -23,15 +23,33 @@
         <input type="checkbox" id="menu" class="estiloMenu">
         <label for="menu" class="fa-solid fa-bars imagenMenu"></label>
         <nav class="navbarBase">
-            <a href="{% url 'tasks' %}" class="">Actividades Pendientes</a>
-            <a href="{% url 'tasks_completed' %}" class="">Actividades Completadas</a>
-            <a href="{% url 'create_task' %}" class="">Crear Actividad</a>
-            <a href="{% url 'inicioAdmin' %}" class="">Actividades Registradas</a>
-            <a href="{% url 'signup' %}" class="">Registrar Usuario</a>
-            <a href="{% url 'usersDetail' %}" class="">Usuarios Registrados</a>
-            <a href="{% url 'signin' %}" class="">Iniciar Sesión</a>
-            <a href="{% url 'logout' %}" class="">Cerrar sesión</a>
-            <a href="{% url 'index' %}" class="">Inicio</a>
+           
+            {% if user.is_authenticated %}
+
+                {% if user.is_superuser%}
+
+                <a href="{% url 'inicioAdmin' %}" >Actividades Registradas</a>
+                <a href="{% url 'signup' %}" >Registrar Usuario</a>
+                <a href="{% url 'usersDetail' %}" >Usuarios Registrados</a>
+
+                {% else %}
+
+                <a href="{% url 'tasks' %}" >Actividades Pendientes</a>
+                <a href="{% url 'tasks_completed' %}" >Actividades Completadas</a>
+                <a href="{% url 'create_task' %}" >Crear Actividad</a>
+
+                {% endif %}
+
+            <a href="{% url 'logout' %}" >Cerrar sesión</a>
+
+            {% else %}
+            
+            
+            <a href="{% url 'index' %}" >Inicio</a>
+            <a href="{% url 'signin' %}" >Iniciar Sesión</a>
+
+            {% endif %}
+
         </nav>
 
     </header>

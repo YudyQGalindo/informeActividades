@@ -22,7 +22,7 @@
             <p>Fecha Inicio: {{ task.created|date }}</p>
             <p>Fecha finalización: {{ task.datecompleted|date }}</p>
             {% else %}
-            <a class="aTask" href="{% url 'task_detail' task.id %}">
+            <a class="aTask" href="{% url 'task_detail' task.id %}"> 
                 <header class="headerTask">
                     <h2 class="h2Pendiente">{{task.title}}</h2>
                     <p class="txtUsuario">{{task.user.username}}</p>

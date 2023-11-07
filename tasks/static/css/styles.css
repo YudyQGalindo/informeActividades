@@ -299,6 +299,22 @@ body {
     border-radius: .6rem;
 }
 
+/* Crear usuario */
+
+.checkbox-label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.checkbox-input {
+    margin-right: 5px;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
 /* Actualizar usuario */
 
 .formUpdate {

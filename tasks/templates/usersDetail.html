@@ -5,7 +5,10 @@
 {% block Contenido %}
 
 <main class="contenedor">
+
             <h1 class="titulo">Usuarios Registrados</h1>
+
+            {% include 'barraBusqueda.html' %}
 
             <ul class="list-group">
                 {% for user in users %}
@@ -15,6 +18,7 @@
                         <p>Nombre: {{user.first_name}}</p>
                         <p>Apellido: {{user.last_name}}</p>
                         <p>Dependencia: {{user.dependencia}}</p>
+                        <p>is_superuser: {{user.is_superuser}}</p>
                     </a>
                 </li>
                 {% endfor %}
