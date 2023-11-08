@@ -16,7 +16,7 @@
             {% if task.datecompleted %}
             <header class="headerTask">
                 <h2 class="h2Completada">{{task.title}}</h2>
-                <p class="txtUsuario">{{task.user.username}}</p>
+                <p class="txtUsuario">{{ user.first_name }} {{ user.last_name }}</p>
             </header>
             <p>Descripción: {{task.description}}</p>
             <p>Fecha Inicio: {{ task.created|date }}</p>

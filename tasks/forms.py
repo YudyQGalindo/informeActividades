@@ -12,7 +12,7 @@ class createTaskForm(ModelForm):
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser']
+        fields = ['username', 'first_name', 'last_name', 'password1', 'password2', 'is_superuser', 'dependencia']
 
 class UserUpdateForm(UserChangeForm):
     class Meta:

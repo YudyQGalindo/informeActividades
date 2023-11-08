@@ -12,4 +12,4 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return 'Actividad: ' + self.title + ' - Realizado por: ' + self.user.username
+        return 'Actividad: ' + self.title + ' - Realizado por: ' + self.user.username + ' - Realizado por: ' + self.user.dependencia

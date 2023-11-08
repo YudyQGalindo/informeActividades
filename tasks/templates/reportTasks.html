@@ -1,0 +1,83 @@
+{% extends 'baseP.html' %}
+
+{% block Titulo %} Reporte de Actividades {% endblock Titulo %}
+
+{% block Contenido %}
+
+{% load static %}
+
+<main class="contenedor">
+
+    <h1 class="titulo">Reporte de Actividades</h1>
+
+    <p class="txtReporte"><b>Nombres y Apellidos:</b> {{ user.first_name }} {{ user.last_name }}</p>
+    <p class="txtReporte"><b>Dependencia:</b> {{ user.dependencia }}</p>
+
+    <div class="contFechas">
+        <form method="get" action="{% url 'reportTasks' %}" class="form-container">
+            <input type="date" id="dateReport1" class="inputReport" name="dateReport1">
+            <input type="date" id="dateReport2" class="inputReport" name="dateReport2">
+            <button class="btnReport btnVerde" type="submit">Filtrar</button>
+        </form>
+        <form method="get" action="{% url 'generate_pdf' %}" class="form-container">
+            <input type="hidden" name="for_pdf" value="true">
+            <input type="hidden" name="dateReport1" value="{{ request.GET.dateReport1 }}">
+            <input type="hidden" name="dateReport2" value="{{ request.GET.dateReport2 }}">
+            <button class="btnReport btnRojo" type="submit">Descargar Reporte</button>
+        </form>
+    </div>
+
+    <table class="tableReport">
+        <thead>
+            <tr class="trReport">
+                <th class="thReport">Título</th>
+                <th class="thReport">Descripción</th>
+                <th class="thReport">Fecha Inicio</th>
+                <th class="thReport">Fecha Finalización</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr class="trReport">
+                <td class="tdReport">{{ task.title }}</td>
+                <td class="tdReport">{{ task.description }}</td>
+                <td class="tdReport">{{ task.created|date }}</td>
+                <td class="tdReport">
+                    {% if task.datecompleted %}
+                    {{ task.datecompleted|date }}
+                    {% else %}
+                    En progreso
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+
+            <tr class="trReport">
+                <td class="tdReportExtra"><b>Total</b></td>
+                <td class="tdReportExtra"><b>Actividades:</b> {{ total_activities }}</td>
+                <td class="tdReportExtra"><b>En progreso:</b> {{ activities_in_progress }}</td>
+                <td class="tdReportExtra"><b>Finalizadas:</b> {{ activities_completed }}</td>
+            </tr>
+            <tr class="trReport">
+                <td class="tdReportExtra"><b>Elaborado por:</b></td>
+                <td class="tdReportExtra"><b>Firma</b></td>
+                <td class="tdReportExtra"><b>Aprobado por:</b></td>
+                <td class="tdReportExtra"><b>Firma</b></td>
+            </tr>
+            <tr class="trReport">
+                <td class="tdReport tdReportSize">{{ user.first_name }} {{ user.last_name }}</td>
+                <td class="tdReport tdReportSize"></td>
+                <td class="tdReport tdReportSize"></td>
+                <td class="tdReport tdReportSize"></td>
+            </tr>
+            <tr class="trReport">
+                <td class="tdReportExtra"><b>Dependencia: </b></td>
+                <td class="tdReport">{{ user.dependencia }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</main>
+
+{% endblock Contenido %}

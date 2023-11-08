@@ -390,26 +390,106 @@ body {
     gap: .6rem;
 }
 
-.contFigTask{
+.contFigTask {
     overflow: hidden;
     border-radius: 1rem;
     background-color: #8b009775;
     display: flex;
 }
 
-.tituloTask{
+.tituloTask {
     font-size: 2.5rem;
 }
 
-.textoTask{
+.textoTask {
     font-size: 1.3rem;
 }
+
+/* Reporte de actividades */
+.txtReporte {
+    font-size: 1.6rem;
+    color: #0A2A47;
+}
+
+.contFechas {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.inputReport {
+    background-color: #0052D4;
+    padding: 15px;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.btnReport {
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    height: 55px;
+    width: 200px;
+}
+
+.tableReport {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tdReport {
+    border: 3px solid #000;
+    padding: 8px;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.tdReportExtra {
+    border: 3px solid #000;
+    padding: 8px;
+    text-align: center;
+    color: #0A2A47;
+    font-size: 1.4rem;
+    height: 60px;
+}
+
+.tdReportSize {
+    height: 80px;
+}
+
+.thReport {
+    border: 3px solid #000;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.4rem;
+    background-color: #0A2A47;
+    color: #fff;
+}
+
+.trReport:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 
 /* Paginación */
 
 .contPagina {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
@@ -432,43 +512,43 @@ body {
 }
 
 .current-page a {
-    color: #05c23e; 
-    font-weight: bold; 
+    color: #05c23e;
+    font-weight: bold;
 }
 
 /* Barra de búsqueda */
 
 .search-bar {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    padding: 10px; 
-    width: 80%; 
-    margin: 0 auto; 
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .search-bar form {
     display: flex;
     align-items: center;
-    width: 100%; 
+    width: 100%;
 }
 
 .search-bar input[type="text"] {
     padding: 5px;
     border-radius: 5px;
-    margin-right: 10px; 
-    font-size: 1.2rem; 
-    width: 100%; 
+    margin-right: 10px;
+    font-size: 1.2rem;
+    width: 100%;
 }
 
 .search-bar button {
-    background-color: #0052D4; 
-    color: #fff; 
+    background-color: #0052D4;
+    color: #fff;
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
 }
 
 /* Footer */
@@ -574,6 +654,27 @@ footer {
 
     .caracteristicaInd img {
         width: 70%;
+    }
+
+    /* Reporte de actividades */
+
+    .contFechas {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-container {
+        margin-bottom: 20px;
+    }
+    
+    .inputReport {
+        width: 100%;
+        margin-right: 20px;
+    }
+
+    .btnReport {
+        width: 100%;
+        margin-right: 20px;
     }
 
     /*Página base*/
