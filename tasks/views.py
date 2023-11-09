@@ -1,6 +1,5 @@
 from io import BytesIO
 from xhtml2pdf import pisa
-from weasyprint import HTML
 from django.template.loader import get_template
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
@@ -8,12 +7,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views import View
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.template.loader import render_to_string
 from datetime import datetime
 from .forms import createTaskForm, CustomUserCreationForm, UserUpdateForm
 from .models import Task
@@ -78,6 +74,14 @@ class UserTasksListView(normalUserMixin, ListView):
             user=self.request.user,
             datecompleted__isnull=True
         )
+
+        search_query = self.request.GET.get("buscar")
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) |
+                Q(description__icontains=search_query)
+            ).distinct()
+
         return queryset
 
 # Mostrar las actividades completadas de un usuario
@@ -87,14 +91,19 @@ class UserCompletedTasksListView(normalUserMixin, ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        return Task.objects.filter(
+        queryset = Task.objects.filter(
             user=self.request.user,
             datecompleted__isnull=False
         ).order_by('-datecompleted')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        search_query = self.request.GET.get("buscar")
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) |
+                Q(description__icontains=search_query)
+            ).distinct()
+
+        return queryset
 
 # Actualizar las actividades pendientes de un usuario
 class TaskUpdateView(normalUserMixin, UpdateView):
@@ -182,7 +191,7 @@ def render_to_pdf(template_src, context_dict={}):
 
 # Generar reporte en PDF
 class GeneratePDFView(TemplateView):
-    template_name = 'reportTasks.html'
+    template_name = 'baseP.html'
 
     def get(self, request, *args, **kwargs):
         user = self.request.user
@@ -204,8 +213,7 @@ class GeneratePDFView(TemplateView):
             'activities_completed': queryset.filter(datecompleted__isnull=False).count(),
         }
 
-        html = render_to_string(self.template_name, context)
-        pdf = HTML(string=html).write_pdf()
+        pdf = render_to_pdf(self.template_name, context)
 
         if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
@@ -222,6 +230,20 @@ class InicioAdminListView(superUserMixin, ListView):
     template_name = 'inicioAdmin.html'
     context_object_name = 'tasks'
 
+    def get_queryset(self):
+        admin_user = self.request.user
+        queryset = Task.objects.filter(user__dependencia__iexact=admin_user.dependencia)
+
+        search_query = self.request.GET.get("buscar")
+        if search_query:
+            queryset = queryset.filter(
+                Q(user__username__icontains=search_query) |
+                Q(user__dependencia__icontains=search_query) |
+                Q(title__icontains=search_query) |
+                Q(description__icontains=search_query)
+            ).distinct()
+
+        return queryset
 
 # Registrar un nuevo usuario
 class SignupView(superUserMixin, CreateView):
@@ -231,8 +253,8 @@ class SignupView(superUserMixin, CreateView):
 
     def form_valid(self, form):
         new_user = form.save(commit=False)
-        is_staff = form.cleaned_data.get('is_staff')
-        if is_staff:
+        is_superuser = form.cleaned_data.get('is_superuser')
+        if is_superuser:
             new_user.is_superuser = True
         else:
             new_user.is_superuser = False
@@ -252,7 +274,22 @@ class UsersDetailView(superUserMixin, ListView):
     context_object_name = 'users'
 
     def get_queryset(self):
-        return User.objects.all()
+        admin_user = self.request.user
+        if admin_user.username == 'Admin':
+            queryset = User.objects.all()
+        else:
+            queryset = User.objects.filter(dependencia__iexact=admin_user.dependencia)
+
+        search_query = self.request.GET.get("buscar")
+        if search_query:
+            queryset = queryset.filter(
+                Q(username__icontains=search_query) |
+                Q(first_name__icontains=search_query) |
+                Q(last_name__icontains=search_query) |
+                Q(dependencia__icontains=search_query)
+            ).distinct()
+
+        return queryset
 
 # Actualizar los datos del usuario panel Admin
 class UserUpdateView(superUserMixin, UpdateView):
@@ -273,7 +310,7 @@ class UserUpdateView(superUserMixin, UpdateView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            return self.form_invalid(form)
+            return self.render_to_response(self.get_context_data(form=form, error="Ingrese datos válidos: Recuerde que el usuario debe contener solo letras, numeros y caracteres como @/./+/-/_"))
 
 # Eliminar los datos de usuario
 class UserDeleteView(superUserMixin, DeleteView):
