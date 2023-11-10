@@ -18,12 +18,11 @@
                         <p>Nombre: {{user.first_name}}</p>
                         <p>Apellido: {{user.last_name}}</p>
                         <p>Dependencia: {{user.dependencia}}</p>
+                        <p>su: {{user.is_superuser}}</p>
                     </a>
                 </li>
                 {% endfor %}
             </ul>
-
-            {% include 'paginasUser.html' %}
 
 </main>
 

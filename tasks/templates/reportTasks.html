@@ -1,83 +1,166 @@
-{% extends 'baseP.html' %}
-
-{% block Titulo %} Reporte de Actividades {% endblock Titulo %}
-
-{% block Contenido %}
-
 {% load static %}
 
-<main class="contenedor">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h1 class="titulo">Reporte de Actividades</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title> Reporte de Actividades </title>
+</head>
 
-    <p class="txtReporte"><b>Nombres y Apellidos:</b> {{ user.first_name }} {{ user.last_name }}</p>
-    <p class="txtReporte"><b>Dependencia:</b> {{ user.dependencia }}</p>
+<body>
 
-    <div class="contFechas">
-        <form method="get" action="{% url 'reportTasks' %}" class="form-container">
-            <input type="date" id="dateReport1" class="inputReport" name="dateReport1">
-            <input type="date" id="dateReport2" class="inputReport" name="dateReport2">
-            <button class="btnReport btnVerde" type="submit">Filtrar</button>
-        </form>
-        <form method="get" action="{% url 'generate_pdf' %}" class="form-container">
-            <input type="hidden" name="for_pdf" value="true">
-            <input type="hidden" name="dateReport1" value="{{ request.GET.dateReport1 }}">
-            <input type="hidden" name="dateReport2" value="{{ request.GET.dateReport2 }}">
-            <button class="btnReport btnRojo" type="submit">Descargar Reporte</button>
-        </form>
-    </div>
+    <header class="headerBase">
 
-    <table class="tableReport">
-        <thead>
-            <tr class="trReport">
-                <th class="thReport">Título</th>
-                <th class="thReport">Descripción</th>
-                <th class="thReport">Fecha Inicio</th>
-                <th class="thReport">Fecha Finalización</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for task in tasks %}
-            <tr class="trReport">
-                <td class="tdReport">{{ task.title }}</td>
-                <td class="tdReport">{{ task.description }}</td>
-                <td class="tdReport">{{ task.created|date }}</td>
-                <td class="tdReport">
-                    {% if task.datecompleted %}
-                    {{ task.datecompleted|date }}
-                    {% else %}
-                    En progreso
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
+        <img src="{% static 'img/logochiquinquira.png' %}" alt="Logo de Chiquinquirá" class="logo">
 
-            <tr class="trReport">
-                <td class="tdReportExtra"><b>Total</b></td>
-                <td class="tdReportExtra"><b>Actividades:</b> {{ total_activities }}</td>
-                <td class="tdReportExtra"><b>En progreso:</b> {{ activities_in_progress }}</td>
-                <td class="tdReportExtra"><b>Finalizadas:</b> {{ activities_completed }}</td>
-            </tr>
-            <tr class="trReport">
-                <td class="tdReportExtra"><b>Elaborado por:</b></td>
-                <td class="tdReportExtra"><b>Firma</b></td>
-                <td class="tdReportExtra"><b>Aprobado por:</b></td>
-                <td class="tdReportExtra"><b>Firma</b></td>
-            </tr>
-            <tr class="trReport">
-                <td class="tdReport tdReportSize">{{ user.first_name }} {{ user.last_name }}</td>
-                <td class="tdReport tdReportSize"></td>
-                <td class="tdReport tdReportSize"></td>
-                <td class="tdReport tdReportSize"></td>
-            </tr>
-            <tr class="trReport">
-                <td class="tdReportExtra"><b>Dependencia: </b></td>
-                <td class="tdReport">{{ user.dependencia }}</td>
-            </tr>
+        <input type="checkbox" id="menu" class="estiloMenu">
+        <label for="menu" class="fa-solid fa-bars imagenMenu"></label>
+        <nav class="navbarBase">
 
-        </tbody>
-    </table>
+            {% if user.is_authenticated %}
 
-</main>
+            {% if user.is_superuser%}
 
-{% endblock Contenido %}
+            <a href="{% url 'inicioAdmin' %}">Actividades Registradas</a>
+            <a href="{% url 'signup' %}">Registrar Usuario</a>
+            <a href="{% url 'usersDetail' %}">Usuarios Registrados</a>
+
+            {% else %}
+
+            <a href="{% url 'tasks' %}">Actividades Pendientes</a>
+            <a href="{% url 'tasks_completed' %}">Actividades Completadas</a>
+            <a href="{% url 'create_task' %}">Crear Actividad</a>
+            <a href="{% url 'reportTasks' %}">Reporte de Actividades</a>
+
+            {% endif %}
+
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+
+            {% else %}
+
+
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'signin' %}">Iniciar Sesión</a>
+
+            {% endif %}
+
+        </nav>
+
+    </header>
+
+    <main class="contenedor">
+
+        <h1 class="titulo">Reporte de Actividades</h1>
+
+        <p class="txtReporte"><b>Nombres y Apellidos:</b> {{ user.first_name }} {{ user.last_name }}</p>
+        <p class="txtReporte"><b>Dependencia:</b> {{ user.dependencia }}</p>
+
+        <div class="contFechas">
+            <form method="get" action="{% url 'reportTasks' %}" class="form-container">
+                <input type="date" id="dateReport1" class="inputReport" name="dateReport1">
+                <input type="date" id="dateReport2" class="inputReport" name="dateReport2">
+                <button class="btnReport btnVerde" type="submit">Filtrar</button>
+            </form>
+            <form method="get" action="{% url 'generate_pdf' %}" class="form-container">
+                <input type="hidden" name="for_pdf" value="true">
+                <input type="hidden" name="dateReport1" value="{{ request.GET.dateReport1 }}">
+                <input type="hidden" name="dateReport2" value="{{ request.GET.dateReport2 }}">
+                <button class="btnReport btnRojo" type="submit">Descargar Reporte</button>
+            </form>
+        </div>
+
+        <table class="tableReport">
+            <thead>
+                <tr class="trReport">
+                    <th class="thReport">Título</th>
+                    <th class="thReport">Descripción</th>
+                    <th class="thReport">Fecha Inicio</th>
+                    <th class="thReport">Fecha Finalización</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr class="trReport">
+                    <td class="tdReport">{{ task.title }}</td>
+                    <td class="tdReport">{{ task.description }}</td>
+                    <td class="tdReport">{{ task.created|date }}</td>
+                    <td class="tdReport">
+                        {% if task.datecompleted %}
+                        {{ task.datecompleted|date }}
+                        {% else %}
+                        En progreso
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <tr class="trReport">
+                    <td class="tdReportExtra"><b>Total</b></td>
+                    <td class="tdReportExtra"><b>Actividades:</b> {{ total_activities }}</td>
+                    <td class="tdReportExtra"><b>En progreso:</b> {{ activities_in_progress }}</td>
+                    <td class="tdReportExtra"><b>Finalizadas:</b> {{ activities_completed }}</td>
+                </tr>
+                <tr class="trReport">
+                    <td class="tdReportExtra"><b>Elaborado por:</b></td>
+                    <td class="tdReportExtra"><b>Firma</b></td>
+                    <td class="tdReportExtra"><b>Aprobado por:</b></td>
+                    <td class="tdReportExtra"><b>Firma</b></td>
+                </tr>
+                <tr class="trReport">
+                    <td class="tdReport tdReportSize">{{ user.first_name }} {{ user.last_name }}</td>
+                    <td class="tdReport tdReportSize"></td>
+                    <td class="tdReport tdReportSize"></td>
+                    <td class="tdReport tdReportSize"></td>
+                </tr>
+                <tr class="trReport">
+                    <td class="tdReportExtra"><b>Dependencia: </b></td>
+                    <td class="tdReport">{{ user.dependencia }}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </main>
+
+    <footer>
+        <div class="ftcontainer">
+            <div class="row">
+                <div class="col">
+
+                    <h4>Alcaldía de Chiquinquirá</h4>
+                    <p><b>Dirección:</b> Calle 17 No. 7 A - 48 CAM Chiquinquirá - Boyacá</p>
+                    <p><b>Horario de Atención:</b> Lunes a Jueves de 8:00 a.m. a 12:00 m y 2:00 p.m. a 6:00 p.m. Viernes
+                        de 8:00 a.m. a 12:00 m y de 2:00 p.m. a 5:30 p.m</p>
+                </div>
+
+                <div class="col">
+                    <h4>Siguenos</h4>
+                    <ul class="social-icons">
+                        <li><a href="https://www.facebook.com/AlChiquinquira?mibextid=LQQJ4d"><i
+                                    class="fa-brands fa-square-facebook" style="color: #fff;"></i></a></li>
+                        <li><a href="https://www.instagram.com/alchiquinquira?igshid=OGQ5ZDc2ODk2ZA%3D%3D"><i
+                                    class="fa-brands fa-square-instagram" style="color: #fff;"></i></a></li>
+                        <li><a href="https://www.youtube.com/@alcaldiadechiquinquirapren2664"><i
+                                    class="fa-brands fa-square-youtube" style="color: #fff;"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h4>Acerca del sitio</h4>
+                    <p>Asesorado, diseñado y desarrollado por: Yudy Quintero © Copyright 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

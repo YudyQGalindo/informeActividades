@@ -7,3 +7,4 @@ django-storages==1.14.1
 django-ckeditor==6.3.2
 psycopg2==2.9.8
 xhtml2pdf==0.2.13
+reportlab==4.0.7

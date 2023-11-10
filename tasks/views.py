@@ -1,11 +1,11 @@
 from io import BytesIO
 from xhtml2pdf import pisa
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string 
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, FileResponse
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
@@ -148,7 +148,7 @@ class TaskDeleteView(normalUserMixin, DeleteView):
         return reverse_lazy('tasks')
 
 # Mostrar el reporte de actvidades
-class reportTasks(ListView):
+class reportTasks(normalUserMixin, ListView):
     model = Task
     template_name = 'reportTasks.html'
     context_object_name = 'tasks'
@@ -190,8 +190,8 @@ def render_to_pdf(template_src, context_dict={}):
     return None
 
 # Generar reporte en PDF
-class GeneratePDFView(TemplateView):
-    template_name = 'baseP.html'
+class GeneratePDFView(normalUserMixin, TemplateView):
+    template_name = 'reportTasks.html'
 
     def get(self, request, *args, **kwargs):
         user = self.request.user
